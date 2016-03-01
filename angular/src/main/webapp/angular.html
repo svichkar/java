@@ -2,23 +2,22 @@
     <title>Angular</title>
     <meta name="description" content="student grade management website">
     <link href="/angular/images/favicon.png" rel="shortcut icon" type="shortcut/ico">
+
+    <script src="javascript/angular/angular.js" type="text/javascript"></script>
+    <script src="javascript/angular/angular-resource.js" type="text/javascript"></script>
+    <script src="javascript/angular/angular-route.js" type="text/javascript"></script>
+
     <script src="/angular/javascript/toggleScript.js" type="text/javascript"></script>
     <script src="/angular/javascript/focus.js" type="text/javascript"></script>
     <script src="/angular/javascript/validator/constant.js" type="text/javascript"></script>
     <script src="javascript/validator/studentOptions.js" type="text/javascript"></script><style type="text/css"></style>
     <script src="/angular/javascript/validate.js" type="text/javascript"></script>
 
-    <script src="javascript/angular/angular.min.js" type="text/javascript"></script>
-
-    <script src="javascript/angular/controllers/controllers.js" type="text/javascript"></script>
-    <script src="javascript/angular/services/services.js" type="text/javascript"></script>
-    <script src="javascript/angular/app.js" type="text/javascript"></script>
-
     <link href="/angular/style/style.css" type="text/css" rel="stylesheet">
     <link href="/angular/style/tooltips.css" type="text/css" rel="stylesheet">
 </head>
 
-<body ng-app="myApp">
+<body ng-app="myApp" ng-controller="StudentListCtrl">
 <header>
     <div class="container">
         <a href="/angular/home">
@@ -30,5 +29,9 @@
 <div class="container" ng-view=""></div>
 
 <div id="footer">Copyright © 2016 | All Rights Reserved</div>
+
+<script src="javascript/angular/services/services.js" type="text/javascript"></script>
+<script src="javascript/angular/controllers/controllers.js" type="text/javascript"></script>
+
 </body>
 </html>

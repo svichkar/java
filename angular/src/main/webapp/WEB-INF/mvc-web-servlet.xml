@@ -16,6 +16,7 @@
     <mvc:resources location="/images/" mapping="/images/**"/>
     <mvc:resources location="/javascript/" mapping="/javascript/**"/>
     <mvc:resources location="/onePageApp.html" mapping="onePageApp.html" />
+    <mvc:resources location="/angular.html" mapping="angular.html" />
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
             <value>/WEB-INF/jsp/</value>

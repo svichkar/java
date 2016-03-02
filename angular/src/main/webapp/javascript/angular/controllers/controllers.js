@@ -26,7 +26,7 @@ app.controller('StudentCtrl', ['$scope', 'StudentsFactory', 'StudentFactory', '$
 
     /* callback for ng-click 'createUser': */
     $scope.createNewUser = function () {
-      $location.path('/user-creation');
+      $location.path('/new');
     };
 
     $scope.users = UsersFactory.query();

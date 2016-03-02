@@ -12,130 +12,24 @@
                     <th>Term</th>
                     <th>Status</th>
                     <th>Commands</th>
-                    <th>Details</th>
                 </tr>
                 </thead>
                 <tbody>
-
                 <tr onclick="toggleSelected(this)" ng-repeat="student in students">
-                    <td>1</td>
-                    <td class="tooltips">
-                        <input type="text" name="studentId" value="{{student.id}}" hidden="">
-                        <input type="text" name="firstName" value="{{student.firstName}}" onfocus="showTip(this, 'student name, e.g. <i>Ivan</i>');" onblur="hideTip(this)">
-                        <span name="error" style="visibility:hidden" class="errorValidation"></span>
-                        <div id="message" style="font-size:10;"></div>
-                    </td>
-                    <td class="tooltips">
-                        <input type="text" name="lastName" value="{{student.lastName}}" onfocus="showTip(this, 'last name, e.g. <i>Ivanov</i>');" onblur="hideTip(this)">
-                        <span name="error" style="visibility:hidden" class="errorValidation"></span>
-                        <div id="message" style="font-size:10;"></div>
-                    </td>
-                    <td class="tooltips">
-                        <input type="date" name="date" value="{{student.admissionDate}}" style="border: none;font-size: 15;" onfocus="showTip(this, 'pick up a date, e.g. <i>01-FEB-2016</i>');" onblur="hideTip(this)">
-                        <span name="error" style="visibility:hidden" class="errorValidation"></span>
-                        <div id="message" style="font-size:10;"></div>
-                    </td>
-                    <td class="tooltips">
-                        <select name="selectedGroup" onfocus="showTip(this, 'pick up a group, e.g. <i>group 1</i>');" onblur="hideTip(this)">
-                            <option value="java 15-1">java 15-1</option>
-                            <option value="java 15-2">java 15-2</option>
-                            <option value="java 15-3" selected="">{{student.studentGroup.groupName}}</option>
-                        </select>
-                        <span name="error" style="visibility:hidden" class="errorValidation"></span>
-                        <div id="message" style="font-size:10;"></div>
-                    </td>
-                    <td class="tooltips">
-                        <select name="selectedTerm" onfocus="showTip(this, 'pick up a term, e.g. <i>first</i>');" onblur="hideTip(this)">
-                            <option value="first" selected="">{{student.term.termName}}</option>
-                            <option value="second">second</option>
-                            <option value="third">third</option>
-                            <option value="fourth">fourth</option>
-                        </select>
-                        <span name="error" style="visibility:hidden" class="errorValidation"></span>
-                        <div id="message" style="font-size:10;"></div>
-                    </td>
-                    <td class="tooltips">
-                        <select name="selectedStatus" onfocus="showTip(this, 'pick up a status, e.g. <i>active</i>');" onblur="hideTip(this)">
-                            <option value="active" selected="">{{student.status.statusName}}</option>
-                            <option value="academic vacation">academic vacation</option>
-                            <option value="expelled">expelled</option>
-                            <option value="graduated">graduated</option>
-                            <option value="inactive">inactive</option>
-                        </select>
-                        <span name="error" style="visibility:hidden" class="errorValidation"></span>
-                        <div id="message" style="font-size:10;"></div>
-                    </td>
+                    <td>{{student.id}}</td>
+                    <td>{{student.firstName}}</td>
+                    <td>{{student.lastName}}</td>
+                    <td>{{student.admissionDate}}</td>
+                    <td>{{student.studentGroup.groupName}}</td>
+                    <td>{{student.term.termName}}</td>
+                    <td>{{student.status.statusName}}</td>
                     <td>
-                        <input type="submit" name="update" value="update">
+                        <input type="submit" name="update" value="edit">
                         <input type="submit" name="delete" value="delete">
                     </td>
-                    <form id="command" action="student" method="get"></form>
-                    <td>
-                        <input type="text" name="studentId" value="9" hidden="">
-                        <input type="submit" name="show" value="details">
-                    </td>
                 </tr>
-
-                <!--form id="command" action="student" method="post" onsubmit="return validateForm(this, options)"></form>
-                <tr>
-                    <td readonly=""></td>
-                    <td class="tooltips">
-                        <input type="text" name="firstName" placeholder="enter first name" onfocus="showTip(this, 'student name, e.g. <i>Ivan</i>');" onblur="hideTip(this)">
-                        <span name="error" style="visibility:hidden" class="errorValidation"></span>
-                        <div id="message" style="font-size:10;"></div>
-                    </td>
-                    <td class="tooltips">
-                        <input type="text" name="lastName" placeholder="enter last name" onfocus="showTip(this, 'last name, e.g. <i>Ivanov</i>');" onblur="hideTip(this)">
-                        <span name="error" style="visibility:hidden" class="errorValidation"></span>
-                        <div id="message" style="font-size:10;"></div>
-                    </td>
-                    <td class="tooltips">
-                        <input type="date" name="date" style="background: #E5E5DB;border: none;font-size: 15;" onfocus="showTip(this, 'pick up a date, e.g. <i>01-FEB-2016</i>');" onblur="hideTip(this)">
-                        <span name="error" style="visibility:hidden" class="errorValidation"></span>
-                        <div id="message" style="font-size:10;"></div>
-                    </td>
-                    <td class="tooltips">
-                        <select name="selectedGroup" onfocus="showTip(this, 'pick up a group, e.g. <i>group 1</i>');" onblur="hideTip(this)">
-                            <option value="" selected="" disabled="">..........</option>
-                            <option value="java 15-1">java 15-1</option>
-                            <option value="java 15-2">java 15-2</option>
-                            <option value="java 15-3">java 15-3</option>
-                        </select>
-                        <span name="error" style="visibility:hidden" class="errorValidation"></span>
-                        <div id="message" style="font-size:10;"></div>
-                    </td>
-                    <td class="tooltips">
-                        <select name="selectedTerm" onfocus="showTip(this, 'pick up a term, e.g. <i>first</i>');" onblur="hideTip(this)">
-                            <option value="" selected="" disabled="">..........</option>
-                            <option value="first">first</option>
-                            <option value="second">second</option>
-                            <option value="third">third</option>
-                            <option value="fourth">fourth</option>
-                        </select>
-                        <span name="error" style="visibility:hidden" class="errorValidation"></span>
-                        <div id="message" style="font-size:10;"></div>
-                    </td>
-                    <td class="tooltips">
-                        <select name="selectedStatus" onfocus="showTip(this, 'pick up a status, e.g. <i>active</i>');" onblur="hideTip(this)">
-                            <option value="" selected="" disabled="">..........</option>
-                            <option value="active">active</option>
-                            <option value="academic vacation">academic vacation</option>
-                            <option value="expelled">expelled</option>
-                            <option value="graduated">graduated</option>
-                            <option value="inactive">inactive</option>
-                        </select>
-                        <span name="error" style="visibility:hidden" class="errorValidation"></span>
-                        <div id="message" style="font-size:10;"></div>
-                    </td>
-                    <td>
-                        <input type="submit" name="add" value="add">
-                    </td>
-                    <td readonly=""></td>
-                </tr-->
-
                 </tbody>
             </table>
-
         </div>
     </div>
 </div>

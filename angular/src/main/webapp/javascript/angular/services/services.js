@@ -1,4 +1,6 @@
-var services = angular.module('myApp.services', ['ngResource']);
+"use strict";
+
+var services = angular.module('app.services', ['ngResource']);
 
 services.factory('StudentsFactory', function ($resource) {
     return $resource('ws/rest/studentService/students', {}, {

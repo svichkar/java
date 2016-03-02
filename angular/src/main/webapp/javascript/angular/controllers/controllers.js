@@ -1,4 +1,6 @@
-var app = angular.module('myApp.controllers', []);
+"use strict";
+
+var app = angular.module('app.controllers', []);
 
 app.controller('StudentListCtrl', ['$scope',
                                    'StudentsFactory',

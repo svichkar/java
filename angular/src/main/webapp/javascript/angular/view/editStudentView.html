@@ -1,0 +1,36 @@
+<div id="site_content">
+    <div id="content">
+        <div>
+            <table>
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Admission Date</th>
+                    <th>Group</th>
+                    <th>Term</th>
+                    <th>Status</th>
+                    <th>Commands</th>
+                </tr>
+                </thead>
+                <tbody>
+                <form>
+                    <tr onclick="toggleSelected(this)" ng-model="student">
+                        <td readonly="">{{student.id}}</td>
+                        <td>{{student.firstName}}</td>
+                        <td>{{student.lastName}}</td>
+                        <td>{{student.admissionDate}}</td>
+                        <td>{{student.studentGroup.groupName}}</td>
+                        <td>{{student.term.termName}}</td>
+                        <td>{{student.status.statusName}}</td>
+                        <td>
+                            <input type="submit" ng-click="edit(student.id)" name="update" value="edit"/>
+                        </td>
+                    </tr>
+                </form>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

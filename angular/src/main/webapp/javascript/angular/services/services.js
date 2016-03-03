@@ -14,8 +14,8 @@ services.factory('StudentsFactory', function ($resource) {
 services.factory('StudentFactory', function ($resource) {
     return $resource('ws/rest/studentService/student/:id', {}, {
         add: { method: 'POST' },
-        show: { method: 'GET' },
-        update: { method: 'PUT', params: {id: '@id'} },
+        show: { method: 'GET', params: {id: '@id'}},
+        edit: { method: 'PUT', params: {id: '@id'} },
         delete: { method: 'DELETE', params: {id: '@id'} }
     })
 });

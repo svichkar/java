@@ -24,8 +24,8 @@
                     <td>{{student.term.termName}}</td>
                     <td>{{student.status.statusName}}</td>
                     <td>
-                        <input type="submit" name="update" value="edit">
-                        <input type="submit" name="delete" value="delete">
+                        <input type="submit" ng-click="update(student.id)" name="update" value="edit"/>
+                        <input type="submit" ng-click="delete(student.id)" name="delete" value="delete"/>
                     </td>
                 </tr>
                 </tbody>

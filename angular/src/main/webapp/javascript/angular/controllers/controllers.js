@@ -14,20 +14,21 @@ app.controller('StudentCtrl', ['$scope', 'StudentsFactory', 'StudentFactory', '$
   function ($scope, StudentsFactory, StudentFactory, $location) {
 
     /* callback for ng-click 'editStudent': */
-    $scope.editStudent = function (studentId) {
-      $location.path('/user-detail/' + userId);
+    $scope.edit = function (studentId) {
+      $location.path('/edit/' + studentId);
+      StudentFactory.edit({ id: studentId });
     };
 
     /* callback for ng-click 'deleteUser': */
-    $scope.deleteUser = function (userId) {
-      UserFactory.delete({ id: userId });
-      $scope.users = UsersFactory.query();
+    $scope.delete = function (studentId) {
+      StudentFactory.delete({ id: studentId });
+      $scope.students = StudentsFactory.query();
     };
 
     /* callback for ng-click 'createUser': */
-    $scope.createNewUser = function () {
-      $location.path('/new');
+    $scope.add = function () {
+      $location.path('/add');
     };
 
-    $scope.users = UsersFactory.query();
+    $scope.students = StudentsFactory.query();
   }]);

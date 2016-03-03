@@ -1,80 +1,52 @@
-<div id="site_content">
-    <div id="content">
-        <div>
-            <table>
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Admission Date</th>
-                    <th>Group</th>
-                    <th>Term</th>
-                    <th>Status</th>
-                    <th>Commands</th>
-                </tr>
-                </thead>
-                <tbody>
-                <form id="command" action="student" method="post" onsubmit="return validateForm(this, options)">
-                    <tr>
-                    <td readonly=""></td>
-                    <td class="tooltips">
-                        <input type="text" name="firstName" placeholder="enter first name"
-                               onfocus="showTip(this, 'student name, e.g. <i>Ivan</i>');" onblur="hideTip(this)">
-                        <div id="message" style="font-size:10;"></div>
-                    </td>
-                    <td class="tooltips">
-                        <input type="text" name="lastName" placeholder="enter last name"
-                               onfocus="showTip(this, 'last name, e.g. <i>Ivanov</i>');" onblur="hideTip(this)">
-                        <div id="message" style="font-size:10;"></div>
-                    </td>
-                    <td class="tooltips">
-                        <input type="date" name="date" style="background: #E5E5DB;border: none;font-size: 15;"
-                               onfocus="showTip(this, 'pick up a date, e.g. <i>01-FEB-2016</i>');"
-                               onblur="hideTip(this)">
-                        <div id="message" style="font-size:10;"></div>
-                    </td>
-                    <td class="tooltips">
-                        <select name="selectedGroup" onfocus="showTip(this, 'pick up a group, e.g. <i>group 1</i>');"
-                                onblur="hideTip(this)">
-                            <option value="" selected="" disabled="">..........</option>
-                            <option value="java 15-1">java 15-1</option>
-                            <option value="java 15-2">java 15-2</option>
-                            <option value="java 15-3">java 15-3</option>
-                        </select>
-                        <div id="message" style="font-size:10;"></div>
-                    </td>
-                    <td class="tooltips">
-                        <select name="selectedTerm" onfocus="showTip(this, 'pick up a term, e.g. <i>first</i>');"
-                                onblur="hideTip(this)">
-                            <option value="" selected="" disabled="">..........</option>
-                            <option value="first">first</option>
-                            <option value="second">second</option>
-                            <option value="third">third</option>
-                            <option value="fourth">fourth</option>
-                        </select>
-                        <div id="message" style="font-size:10;"></div>
-                    </td>
-                    <td class="tooltips">
-                        <select name="selectedStatus" onfocus="showTip(this, 'pick up a status, e.g. <i>active</i>');"
-                                onblur="hideTip(this)">
-                            <option value="" selected="" disabled="">..........</option>
-                            <option value="active">active</option>
-                            <option value="academic vacation">academic vacation</option>
-                            <option value="expelled">expelled</option>
-                            <option value="graduated">graduated</option>
-                            <option value="inactive">inactive</option>
-                        </select>
-                        <div id="message" style="font-size:10;"></div>
-                    </td>
-                    <td>
-                        <input type="submit" name="add" value="add">
-                    </td>
-                    <td readonly=""></td>
-                </tr>
-                </form>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<div class="content" align="center">
+    <table width="50%">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Admission Date</th>
+            <th>Group</th>
+            <th>Term</th>
+            <th>Status</th>
+            <th>Commands</th>
+        </tr>
+        </thead>
+        <tbody>
+        <form>
+            <tr>
+                <td></td>
+                <td><input required="" type="text" id="firstName"></td>
+                <td><input required="" type="text" id="lastName"></td>
+                <td><input required="" type="date" id="admissionDate"></td>
+                <td>
+                    <select required="" id="studentGroup" name="studentGroup">
+                        <option value="" selected="">--select group--</option>
+                        <option value="1">java 15-1</option>
+                        <option value="2">java 15-2</option>
+                        <option value="3">java 15-3</option>
+                    </select>
+                </td>
+                <td>
+                    <select required="" id="term" name="term">
+                        <option value="" selected="">--select term--</option>
+                        <option value="1">first</option>
+                        <option value="2">second</option>
+                        <option value="3">third</option>
+                        <option value="4">fourth</option>
+                    </select>
+                </td>
+                <td>
+                    <select required="" id="status" name="status">
+                        <option value="" selected="">--select status--</option>
+                        <option value="1">active</option>
+                        <option value="2">academic vacation</option>
+                        <option value="3">expelled</option>
+                    </select>
+                </td>
+                <td><input ng-click="add()" type="submit" value="add"></td>
+            </tr>
+        </form>
+        </tbody>
+    </table>
 </div>

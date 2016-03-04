@@ -1,4 +1,4 @@
-<div class="content" align="center">
+<div class="content" align="center" ng-controller="StudentCtrl as ctrl">
     <table width="50%">
         <thead>
         <tr>
@@ -13,7 +13,7 @@
         </tr>
         </thead>
         <tbody>
-        <form>
+        <form  ng-submit="ctrl.submit()">
             <tr>
                 <td></td>
                 <td><input required="" type="text" id="firstName"></td>
@@ -44,7 +44,7 @@
                         <option value="3">expelled</option>
                     </select>
                 </td>
-                <td><input ng-click="add()" type="submit" value="add"></td>
+                <td><input type="submit" value="add"></td>
             </tr>
         </form>
         </tbody>

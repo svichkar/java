@@ -30,5 +30,8 @@ app.controller('StudentCtrl', ['$scope', 'StudentsFactory', 'StudentFactory', '$
       $location.path('/add');
     };
 
+
+
+
     $scope.students = StudentsFactory.query();
   }]);

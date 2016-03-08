@@ -1,52 +1,58 @@
-<div class="content" align="center" ng-controller="StudentCtrl as ctrl">
-    <table width="50%">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Admission Date</th>
-            <th>Group</th>
-            <th>Term</th>
-            <th>Status</th>
-            <th>Commands</th>
-        </tr>
-        </thead>
-        <tbody>
-        <form  ng-submit="ctrl.submit()">
-            <tr>
-                <td></td>
-                <td><input required="" type="text" id="firstName"></td>
-                <td><input required="" type="text" id="lastName"></td>
-                <td><input required="" type="date" id="admissionDate"></td>
-                <td>
-                    <select required="" id="studentGroup" name="studentGroup">
-                        <option value="" selected="">--select group--</option>
-                        <option value="1">java 15-1</option>
-                        <option value="2">java 15-2</option>
-                        <option value="3">java 15-3</option>
-                    </select>
-                </td>
-                <td>
-                    <select required="" id="term" name="term">
-                        <option value="" selected="">--select term--</option>
-                        <option value="1">first</option>
-                        <option value="2">second</option>
-                        <option value="3">third</option>
-                        <option value="4">fourth</option>
-                    </select>
-                </td>
-                <td>
-                    <select required="" id="status" name="status">
-                        <option value="" selected="">--select status--</option>
-                        <option value="1">active</option>
-                        <option value="2">academic vacation</option>
-                        <option value="3">expelled</option>
-                    </select>
-                </td>
-                <td><input type="submit" value="add"></td>
-            </tr>
-        </form>
-        </tbody>
-    </table>
+<div id="site_content">
+    <div id="content">
+        <div ng-controller="StudentController as ctrl">
+            <table>
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Admission Date</th>
+                    <th>Group</th>
+                    <th>Term</th>
+                    <th>Status</th>
+                    <th>Commands</th>
+                </tr>
+                </thead>
+                <tbody>
+                <form ng-submit="ctrl.add()">
+                    <tr>
+                        <td></td>
+                        <td><input required="" type="text" id="firstName"></td>
+                        <td><input required="" type="text" id="lastName"></td>
+                        <td><input required="" type="date" id="admissionDate"></td>
+                        <td>
+                            <select required="" id="studentGroup" name="studentGroup">
+                                <option value="" selected="">--select group--</option>
+                                <option value="1">java 15-1</option>
+                                <option value="2">java 15-2</option>
+                                <option value="3">java 15-3</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select required="" id="term" name="term">
+                                <option value="" selected="">--select term--</option>
+                                <option value="1">first</option>
+                                <option value="2">second</option>
+                                <option value="3">third</option>
+                                <option value="4">fourth</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select required="" id="status" name="status">
+                                <option value="" selected="">--select status--</option>
+                                <option value="1">active</option>
+                                <option value="2">academic vacation</option>
+                                <option value="3">expelled</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="submit" value="add">
+                        </td>
+                    </tr>
+                </form>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

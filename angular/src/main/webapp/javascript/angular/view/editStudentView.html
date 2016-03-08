@@ -1,6 +1,6 @@
 <div id="site_content">
     <div id="content">
-        <div>
+        <div ng-controller="StudentController as ctrl">
             <table>
                 <thead>
                 <tr>
@@ -16,16 +16,16 @@
                 </thead>
                 <tbody>
                 <form>
-                    <tr onclick="toggleSelected(this)" ng-model="student">
-                        <td readonly="">{{student.id}}</td>
-                        <td>{{student.firstName}}</td>
-                        <td>{{student.lastName}}</td>
-                        <td>{{student.admissionDate}}</td>
-                        <td>{{student.studentGroup.groupName}}</td>
-                        <td>{{student.term.termName}}</td>
-                        <td>{{student.status.statusName}}</td>
+                    <tr>
+                        <td readonly="">{{ctrl.student.id}}</td>
+                        <td>{{ctrl.student.firstName}}</td>
+                        <td>{{ctrl.student.lastName}}</td>
+                        <td>{{ctrl.student.admissionDate}}</td>
+                        <td>{{ctrl.student.studentGroup.groupName}}</td>
+                        <td>{{ctrl.student.term.termName}}</td>
+                        <td>{{ctrl.student.status.statusName}}</td>
                         <td>
-                            <input type="submit" ng-click="edit(student.id)" name="update" value="edit"/>
+                            <input type="submit" ng-submit="edit(student, student.id)" value="edit"/>
                         </td>
                     </tr>
                 </form>

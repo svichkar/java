@@ -1,14 +1,15 @@
 "use strict";
 
-var app = angular.module("app", ['app.services',
-                                 'app.controllers',
-                                 'ngRoute']
-);
-
-app.config(function($routeProvider){
-	$routeProvider
-		.when( '/allStudents', { controller: 'StudentListCtrl', templateUrl: 'javascript/angular/view/studentListView.html' } )
-		.when( '/add', { controller: 'StudentCtrl', templateUrl: 'javascript/angular/view/addStudentView.html' } )
-		.when( '/edit', { controller: 'StudentCtrl', templateUrl: 'javascript/angular/view/editStudentView.html' } )
-		.otherwise( { redirectTo: '/' } );
-});
+var App = angular.module('myApp',['ngRoute'])
+            .config(['$routeProvider', function($routeProvider){
+                    $routeProvider
+                    .when('/',{templateUrl:'javascript/angular/view/studentListView.html'})
+                    .when('/add',{templateUrl:'javascript/angular/view/addStudentView.html'})
+                    .when('/edit/:id',{
+                                        templateUrl:'javascript/angular/view/editStudentView.html',
+                                        controller: ['$routeParams', function($routeParams) {
+                                            var self=this;
+                                            self.student.id = $routeParams.id;
+                                        }]})
+                    .otherwise({redirectTo:'/'});
+}]);

@@ -1,6 +1,6 @@
 <div id="site_content">
-    <div id="content">
-        <div ng-controller="StudentController as ctrl">
+    <div id="content" ng-controller="StudentController as ctrl">
+        <form ng-submit="ctrl.add()">
             <table>
                 <thead>
                 <tr>
@@ -15,44 +15,38 @@
                 </tr>
                 </thead>
                 <tbody>
-                <form ng-submit="ctrl.add()">
-                    <tr>
-                        <td></td>
-                        <td><input required="" type="text" id="firstName"></td>
-                        <td><input required="" type="text" id="lastName"></td>
-                        <td><input required="" type="date" id="admissionDate"></td>
-                        <td>
-                            <select required="" id="studentGroup" name="studentGroup">
-                                <option value="" selected="">--select group--</option>
-                                <option value="1">java 15-1</option>
-                                <option value="2">java 15-2</option>
-                                <option value="3">java 15-3</option>
-                            </select>
-                        </td>
-                        <td>
-                            <select required="" id="term" name="term">
-                                <option value="" selected="">--select term--</option>
-                                <option value="1">first</option>
-                                <option value="2">second</option>
-                                <option value="3">third</option>
-                                <option value="4">fourth</option>
-                            </select>
-                        </td>
-                        <td>
-                            <select required="" id="status" name="status">
-                                <option value="" selected="">--select status--</option>
-                                <option value="1">active</option>
-                                <option value="2">academic vacation</option>
-                                <option value="3">expelled</option>
-                            </select>
-                        </td>
-                        <td>
-                            <input type="submit" value="add">
-                        </td>
-                    </tr>
-                </form>
+                <tr>
+                    <td readonly></td>
+                    <td><input required type="text" ng-model="ctrl.student.firstName"></td>
+                    <td><input required type="text" ng-model="ctrl.student.lastName"></td>
+                    <td><input required type="date" ng-model="ctrl.admissionDate"></td>
+                    <td>
+                        <select required
+                                ng-options="group.groupName for group in ctrl.groupList track by group.groupId"
+                                ng-model="ctrl.student.studentGroup">
+                            <option value="" selected="">--select group--</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select required
+                                ng-options="term.termName for term in ctrl.termList track by term.termId"
+                                ng-model="ctrl.student.term">
+                            <option value="" selected>--select term--</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select required
+                                ng-options="status.statusName for status in ctrl.statusList track by status.statusId"
+                                ng-model="ctrl.student.status">
+                            <option value="" selected>--select status--</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="submit" value="commit">
+                    </td>
+                </tr>
                 </tbody>
             </table>
-        </div>
+        </form>
     </div>
 </div>

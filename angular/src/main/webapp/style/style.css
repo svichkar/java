@@ -143,7 +143,7 @@ table tr td
   border-top: 1px solid #FFF;
 }
 
-input[type="submit"] {
+input[type="submit"], input[type="button"]  {
      width: 100%;
      padding: 0 0 0 0;
      margin: 0 0 2 0;

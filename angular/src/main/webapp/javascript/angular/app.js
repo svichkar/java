@@ -5,11 +5,6 @@ var App = angular.module('myApp',['ngRoute'])
                     $routeProvider
                     .when('/',{templateUrl:'javascript/angular/view/studentListView.html'})
                     .when('/add',{templateUrl:'javascript/angular/view/addStudentView.html'})
-                    .when('/edit/:id',{
-                                        templateUrl:'javascript/angular/view/editStudentView.html',
-                                        controller: ['$routeParams', function($routeParams) {
-                                            var self=this;
-                                            self.student.id = $routeParams.id;
-                                        }]})
+                    .when('/edit/:id',{templateUrl:'javascript/angular/view/editStudentView.html'})
                     .otherwise({redirectTo:'/'});
 }]);

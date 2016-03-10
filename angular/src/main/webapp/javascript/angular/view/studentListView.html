@@ -1,21 +1,21 @@
 <div id="site_content">
     <div id="content">
         <div ng-controller="StudentController as ctrl">
-            <table>
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Admission Date</th>
-                    <th>Group</th>
-                    <th>Term</th>
-                    <th>Status</th>
-                    <th>Commands</th>
-                </tr>
-                </thead>
-                <tbody>
-                <form>
+            <form>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Admission Date</th>
+                        <th>Group</th>
+                        <th>Term</th>
+                        <th>Status</th>
+                        <th>Commands</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     <tr ng-repeat="student in ctrl.students | orderBy:'-student.id'">
                         <td>{{student.id}}</td>
                         <td>{{student.firstName}}</td>
@@ -25,13 +25,13 @@
                         <td>{{student.term.termName}}</td>
                         <td>{{student.status.statusName}}</td>
                         <td>
-                            <input type="submit" ng-submit="ctrl.edit(student.id)" value="edit"/>
-                            <input type="submit" ng-submit="ctrl.remove(student.id)" value="delete"/>
+                            <input type="button" ng-click="ctrl.edit(student)" value="edit"/>
+                            <input type="button" ng-click="ctrl.remove(student.id)" value="delete"/>
                         </td>
                     </tr>
-                </form>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </form>
         </div>
     </div>
 </div>

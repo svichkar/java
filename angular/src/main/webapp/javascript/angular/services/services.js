@@ -17,6 +17,58 @@ App.factory('StudentService', ['$http', '$q', function($http, $q){
 							);
 			},
 
+			fetchStudent: function(id) {
+					return $http.get('ws/rest/studentService/student/' + id)
+							.then(
+									function(response){
+										return response.data;
+									},
+									function(errResponse){
+										console.error('Error while fetching student');
+										return $q.reject(errResponse);
+									}
+							);
+			},
+
+			fetchAllGroups: function() {
+					return $http.get('ws/rest/studentService/group')
+							.then(
+									function(response){
+										return response.data;
+									},
+									function(errResponse){
+										console.error('Error while fetching groups');
+										return $q.reject(errResponse);
+									}
+							);
+			},
+
+			fetchAllStatuses: function() {
+					return $http.get('ws/rest/studentService/status')
+							.then(
+									function(response){
+										return response.data;
+									},
+									function(errResponse){
+										console.error('Error while fetching statuses');
+										return $q.reject(errResponse);
+									}
+							);
+			},
+
+			fetchAllTerms: function() {
+					return $http.get('ws/rest/studentService/term')
+							.then(
+									function(response){
+										return response.data;
+									},
+									function(errResponse){
+										console.error('Error while fetching terms');
+										return $q.reject(errResponse);
+									}
+							);
+			},
+
 		    createStudent: function(student){
 					return $http.post('ws/rest/studentService/student', student)
 							.then(

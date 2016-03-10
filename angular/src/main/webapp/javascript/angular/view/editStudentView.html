@@ -1,36 +1,51 @@
 <div id="site_content">
     <div id="content">
         <div ng-controller="StudentController as ctrl">
-            <table>
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Admission Date</th>
-                    <th>Group</th>
-                    <th>Term</th>
-                    <th>Status</th>
-                    <th>Commands</th>
-                </tr>
-                </thead>
-                <tbody>
-                <form>
+            <form ng-submit="ctrl.commit()">
+                <table>
+                    <thead>
                     <tr>
-                        <td readonly="">{{ctrl.student.id}}</td>
-                        <td>{{ctrl.student.firstName}}</td>
-                        <td>{{ctrl.student.lastName}}</td>
-                        <td>{{ctrl.student.admissionDate}}</td>
-                        <td>{{ctrl.student.studentGroup.groupName}}</td>
-                        <td>{{ctrl.student.term.termName}}</td>
-                        <td>{{ctrl.student.status.statusName}}</td>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Admission Date</th>
+                        <th>Group</th>
+                        <th>Term</th>
+                        <th>Status</th>
+                        <th>Commands</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><input ng-model="ctrl.student.id" readonly></td>
+                        <td><input required type="text" ng-model="ctrl.student.firstName"></td>
+                        <td><input required type="text" ng-model="ctrl.student.lastName"></td>
+                        <td><input required type="date" ng-model="ctrl.admissionDate"></td>
                         <td>
-                            <input type="submit" ng-submit="edit(student, student.id)" value="edit"/>
+                            <select required
+                                    ng-options="group.groupName for group in ctrl.groupList track by group.groupId"
+                                    ng-model="ctrl.student.studentGroup">
+                            </select>
+                        </td>
+                        <td>
+                            <select required
+                                    ng-options="term.termName for term in ctrl.termList track by term.termId"
+                                    ng-model="ctrl.student.term">
+                            </select>
+                        </td>
+                        <td>
+                            <select required
+                                    ng-options="status.statusName for status in ctrl.statusList track by status.statusId"
+                                    ng-model="ctrl.student.status">
+                            </select>
+                        </td>
+                        <td>
+                            <input type="submit" value="commit">
                         </td>
                     </tr>
-                </form>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </form>
         </div>
     </div>
 </div>

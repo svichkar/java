@@ -112,7 +112,6 @@ public class StudentWebService {
         return result;
     }
 
-
     @GET
     @Path("/status")
     @Produces(MediaType.APPLICATION_JSON)

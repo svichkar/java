@@ -1,9 +1,13 @@
 "use strict";
 
-App.controller('StudentController', ['$scope', 'StudentService', function($scope, StudentService) {
+App.controller('StudentController', ['$scope', 'StudentService', '$filter', '$location', '$routeParams', function($scope, StudentService, $filter, $location, $routeParams) {
           var self = this;
           self.students = [];
+          self.groupList = [];
+          self.statusList = [];
+          self.termList = [];
           self.student = {};
+          self.admissionDate;
 
           self.fetchAllStudents = function(){
               StudentService.fetchAllStudents()
@@ -17,7 +21,56 @@ App.controller('StudentController', ['$scope', 'StudentService', function($scope
       			       );
           };
 
+          self.fetchStudent = function(id){
+              StudentService.fetchStudent(id)
+                  .then(
+      					       function(d) {
+      						        self.student = d;
+      					       },
+            					function(errResponse){
+            						console.error('Error while fetching student');
+            					}
+      			       );
+          };
+
+          self.fetchAllGroups = function(){
+              StudentService.fetchAllGroups()
+                  .then(
+      					       function(d) {
+      						        self.groupList = d;
+      					       },
+            					function(errResponse){
+            						console.error('Error while fetching groups');
+            					}
+      			       );
+          };
+
+          self.fetchAllStatuses = function(){
+              StudentService.fetchAllStatuses()
+                  .then(
+      					       function(d) {
+      						        self.statusList = d;
+      					       },
+            					function(errResponse){
+            						console.error('Error while fetching statuses');
+            					}
+      			       );
+          };
+
+          self.fetchAllTerms = function(){
+              StudentService.fetchAllTerms()
+                  .then(
+      					       function(d) {
+      						        self.termList = d;
+      					       },
+            					function(errResponse){
+            						console.error('Error while fetching terms');
+            					}
+      			       );
+          };
+
           self.createStudent = function(student){
+              student.admissionDate = $filter('date')(self.admissionDate, "yyyy-MM-dd");
               StudentService.createStudent(student)
 		              .then(
                       self.fetchAllStudents,
@@ -25,6 +78,7 @@ App.controller('StudentController', ['$scope', 'StudentService', function($scope
 					               console.error('Error while creating Student');
 				              }
                   );
+              $location.path("/");
           };
 
           self.updateStudent = function(student, id){
@@ -48,15 +102,22 @@ App.controller('StudentController', ['$scope', 'StudentService', function($scope
          };
 
           self.fetchAllStudents();
+          self.fetchAllGroups();
+          self.fetchAllStatuses();
+          self.fetchAllTerms();
 
           self.add = function() {
-              console.log('Saving New Student', self.student);
               self.createStudent(self.student);
          };
 
-          self.edit = function(id){
-              self.updateStudent(self.student, self.student.id);
-              console.log('Student updated with id ', id);
+          self.edit = function(student){
+          self.student = student;
+          $location.path('/edit/' + student.id);
+          };
+
+          self.commit = function(){
+          self.updateStudent(self.student, self.student.id);
+          $location.path('/');
           };
 
           self.remove = function(id){

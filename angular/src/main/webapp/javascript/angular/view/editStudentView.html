@@ -17,8 +17,11 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td><input ng-model="ctrl.student.id" readonly></td>
-                        <td><input required type="text" ng-model="ctrl.student.firstName"></td>
+                        <td ng-bind="ctrl.student.id"></td>
+                        <td>
+                            <input hidden type="text" ng-model="ctrl.student.id">
+                            <input required type="text" ng-model="ctrl.student.firstName">
+                        </td>
                         <td><input required type="text" ng-model="ctrl.student.lastName"></td>
                         <td><input required type="date" ng-model="ctrl.admissionDate"></td>
                         <td>

@@ -123,8 +123,8 @@ App.controller('StudentController', ['$scope', 'StudentService', '$filter', '$lo
           };
 
           $scope.remove = function(id){
-              $scope.deleteStudent(id);
-              console.log('id deleted', id);
+          $scope.deleteStudent(id);
+          console.log('id deleted', id);
           };
 
 }]);

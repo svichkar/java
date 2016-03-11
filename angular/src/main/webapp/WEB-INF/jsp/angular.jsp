@@ -4,7 +4,7 @@
         <title>RoutingDemo App</title>
         <link rel="stylesheet" href="style/style.css" type="text/css" media="all">
     </head>
-    <body ng-app="myApp" class="ng-cloak">
+    <body ng-app="myApp" class="ng-cloak"  ng-controller="StudentController">
 
         <h2>Student Management Application</h2>
         <ul>

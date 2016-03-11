@@ -1,6 +1,6 @@
 <div id="site_content">
     <div id="content">
-        <div ng-controller="StudentController as ctrl">
+        <div>
             <form>
                 <table>
                     <thead>
@@ -16,7 +16,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="student in ctrl.students | orderBy:'-student.id'">
+                    <tr ng-repeat="student in students | orderBy:'-student.id'">
                         <td>{{student.id}}</td>
                         <td>{{student.firstName}}</td>
                         <td>{{student.lastName}}</td>
@@ -25,8 +25,8 @@
                         <td>{{student.term.termName}}</td>
                         <td>{{student.status.statusName}}</td>
                         <td>
-                            <input type="button" ng-click="ctrl.edit(student)" value="edit"/>
-                            <input type="button" ng-click="ctrl.remove(student.id)" value="delete"/>
+                            <input type="button" ng-click="edit(student)" value="edit"/>
+                            <input type="button" ng-click="remove(student.id)" value="delete"/>
                         </td>
                     </tr>
                     </tbody>

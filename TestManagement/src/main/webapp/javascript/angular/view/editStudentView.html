@@ -1,0 +1,54 @@
+<div id="site_content">
+    <div id="content">
+        <div>
+            <form ng-submit="ctrl.commit()">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Admission Date</th>
+                        <th>Group</th>
+                        <th>Term</th>
+                        <th>Status</th>
+                        <th>Commands</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td ng-bind="ctrl.student.id" readonly></td>
+                        <td>
+                            <input ng-model="ctrl.student.id" hidden>
+                            <input required type="text" ng-model="ctrl.student.firstName">
+                        </td>
+                        <td><input required type="text" ng-model="ctrl.student.lastName"></td>
+                        <td><input required type="date" ng-model="ctrl.admissionDate"></td>
+                        <td>
+                            <select required
+                                    ng-options="group.groupName for group in ctrl.groupList track by group.groupId"
+                                    ng-model="ctrl.student.studentGroup">
+                            </select>
+                        </td>
+                        <td>
+                            <select required
+                                    ng-options="term.termName for term in ctrl.termList track by term.termId"
+                                    ng-model="ctrl.student.term">
+                            </select>
+                        </td>
+                        <td>
+                            <select required
+                                    ng-options="status.statusName for status in ctrl.statusList track by status.statusId"
+                                    ng-model="ctrl.student.status">
+                            </select>
+                        </td>
+                        <td>
+                            <input type="submit" value="commit">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>

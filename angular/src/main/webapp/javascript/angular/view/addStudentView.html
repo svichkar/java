@@ -1,6 +1,6 @@
 <div id="site_content">
     <div id="content">
-        <form ng-submit="add()">
+        <form ng-submit="ctrl.add()">
             <table>
                 <thead>
                 <tr>
@@ -17,27 +17,27 @@
                 <tbody>
                 <tr>
                     <td readonly></td>
-                    <td><input required type="text" ng-model="student.firstName"></td>
-                    <td><input required type="text" ng-model="student.lastName"></td>
-                    <td><input required type="date" ng-model="admissionDate"></td>
+                    <td><input required type="text" ng-model="ctrl.newStudent.firstName"></td>
+                    <td><input required type="text" ng-model="ctrl.newStudent.lastName"></td>
+                    <td><input required type="date" ng-model="ctrl.newAdmissionDate"></td>
                     <td>
                         <select required
-                                ng-options="group.groupName for group in groupList track by group.groupId"
-                                ng-model="student.studentGroup">
+                                ng-options="group.groupName for group in ctrl.groupList track by group.groupId"
+                                ng-model="ctrl.newStudent.studentGroup">
                             <option value="" selected="">--select group--</option>
                         </select>
                     </td>
                     <td>
                         <select required
-                                ng-options="term.termName for term in termList track by term.termId"
-                                ng-model="student.term">
+                                ng-options="term.termName for term in ctrl.termList track by term.termId"
+                                ng-model="ctrl.newStudent.term">
                             <option value="" selected>--select term--</option>
                         </select>
                     </td>
                     <td>
                         <select required
-                                ng-options="status.statusName for status in statusList track by status.statusId"
-                                ng-model="student.status">
+                                ng-options="status.statusName for status in ctrl.statusList track by status.statusId"
+                                ng-model="ctrl.newStudent.status">
                             <option value="" selected>--select status--</option>
                         </select>
                     </td>

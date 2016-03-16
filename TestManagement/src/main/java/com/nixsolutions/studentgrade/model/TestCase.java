@@ -36,7 +36,7 @@ public class TestCase implements Serializable {
     private String assertion;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "priority_id")
+    @JoinColumn(name = "id")
     @Cascade(CascadeType.DETACH)
     private Priority priority;
 
@@ -45,16 +45,16 @@ public class TestCase implements Serializable {
     private String comment;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "tester_id")
+    @JoinColumn(name = "id")
     @Cascade(CascadeType.DETACH)
     private Tester tester;
 
-    @Column(name = "comment",
-            length = 512)
+    @Column(name = "added",
+            length = 32)
     private Date added;
 
-    @Column(name = "comment",
-            length = 512)
+    @Column(name = "updated",
+            length = 32)
     private Date updated;
 
     public TestCase() {

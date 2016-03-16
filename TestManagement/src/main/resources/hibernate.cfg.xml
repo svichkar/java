@@ -4,7 +4,7 @@
 
 <hibernate-configuration>
     <session-factory>
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
         <property name="hibernate.hbm2ddl.import_files">dml.sql</property>
         <property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>
         <property name="show_sql">true</property>
@@ -12,14 +12,10 @@
         <property name="dialect">org.hibernate.dialect.H2Dialect</property>
         <property name="hibernate.connection.autocommit">true</property>
 
-        <mapping class="com.nixsolutions.studentgrade.model.Term"/>
         <mapping class="com.nixsolutions.studentgrade.model.User"/>
         <mapping class="com.nixsolutions.studentgrade.model.Role"/>
-        <mapping class="com.nixsolutions.studentgrade.model.Grade"/>
-        <mapping class="com.nixsolutions.studentgrade.model.Status"/>
-        <mapping class="com.nixsolutions.studentgrade.model.Subject"/>
-        <mapping class="com.nixsolutions.studentgrade.model.StudentGroup"/>
-        <mapping class="com.nixsolutions.studentgrade.model.Student"/>
-        <mapping class="com.nixsolutions.studentgrade.model.Journal"/>
+        <mapping class="com.nixsolutions.studentgrade.model.TestCase"/>
+        <mapping class="com.nixsolutions.studentgrade.model.Tester"/>
+        <mapping class="com.nixsolutions.studentgrade.model.Priority"/>
     </session-factory>
 </hibernate-configuration>

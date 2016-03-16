@@ -11,7 +11,7 @@
 
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="org.h2.Driver"/>
-        <property name="url" value="jdbc:h2:tcp://localhost/~/sqllab"/>
+        <property name="url" value="jdbc:h2:tcp://localhost/~/dbtest"/>
         <property name="username" value="root"/>
         <property name="password" value="root"/>
     </bean>

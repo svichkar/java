@@ -1,14 +1,13 @@
 package com.nixsolutions.studentgrade.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * Created by konstantin on 3/15/2016.
  */
+@Entity
+@Table(name = "tester")
 public class Tester implements Serializable {
 
     @Id

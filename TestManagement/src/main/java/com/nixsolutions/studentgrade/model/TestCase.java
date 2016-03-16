@@ -35,18 +35,18 @@ public class TestCase implements Serializable {
             length = 512)
     private String assertion;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id")
-    @Cascade(CascadeType.DETACH)
+    @OneToOne
+    @Cascade(CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     private Priority priority;
 
     @Column(name = "comment",
             length = 512)
     private String comment;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id")
-    @Cascade(CascadeType.DETACH)
+    @OneToOne
+    @Cascade(CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     private Tester tester;
 
     @Column(name = "added",

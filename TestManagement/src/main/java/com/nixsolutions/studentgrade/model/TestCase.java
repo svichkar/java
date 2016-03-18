@@ -1,8 +1,5 @@
 package com.nixsolutions.studentgrade.model;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
@@ -35,22 +32,20 @@ public class TestCase implements Serializable {
             length = 512)
     private String assertion;
 
-    @OneToOne
-    @Cascade(CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "priority_id", nullable = false)
     private Priority priority;
 
     @Column(name = "comment",
             length = 512)
     private String comment;
 
-    @OneToOne
-    @Cascade(CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "tester_id", nullable = false)
     private Tester tester;
 
     @Column(name = "added",
-            length = 32)
+            length = 32, nullable = false)
     private Date added;
 
     @Column(name = "updated",

@@ -17,6 +17,19 @@ App.factory('BookService', ['$http', '$q', function($http, $q){
 							);
 			},
 
+		    createBook: function(book) {
+            					return $http.post('book', book)
+            							.then(
+            									function(response){
+            										return response.data;
+            									},
+            									function(errResponse){
+            										console.error('Error while creating book');
+            										return $q.reject(errResponse);
+            									}
+            							);
+            },
+
 	};
 
 }]);

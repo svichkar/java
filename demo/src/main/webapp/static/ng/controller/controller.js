@@ -5,7 +5,7 @@ App.controller('BookController', ['$scope', 'BookService', '$filter', '$location
 
                      var self = this;
                      self.books = [];
-                     self.book;
+                     self.book = {};
 
                      self.fetchBooks = function(){
                          BookService.fetchBooks()
@@ -21,30 +21,18 @@ App.controller('BookController', ['$scope', 'BookService', '$filter', '$location
 
                      self.fetchBooks();
 
-
-                    self.fetchBooks = function(){
-                         BookService.fetchBooks()
-                             .then(
-                 					       function(d) {
-                 						        self.books = d;
-                 					       },
-                       					function(errResponse){
-                       						console.error('Error while fetching books');
-                       					}
-                 			       );
+                     self.createBook = function(book){
+                                 BookService.createBook(book)
+                                      .then(
+                                              self.fetchBooks,
+                                              function(errResponse){
+                                                   console.error('Error while creating book');
+                                              }
+                                       );
                      };
 
-                    self.fetchBooks();
+                     self.add = function() {
+                        self.createBook(self.book);
+                     };
 
-                   self.createStudent = function(book){
-                                 BookService.createStudent(student)
-                                      .then(
-                                         self.fetchAllStudents,
-                                              function(errResponse){
-                                                   console.error('Error while creating Student');
-                                              }
-                                     );
-                                 self.newAdmissionDate = null;
-                                 self.newStudent = {};
-                             };
 }]);

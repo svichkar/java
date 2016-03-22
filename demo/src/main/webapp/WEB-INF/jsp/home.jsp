@@ -1,6 +1,9 @@
 <html>
+<head>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+</head>
 <body ng-app="myApp" class="ng-cloak" ng-controller="BookController as ctrl">
-<h1>Test App Here</h1>
+<h1>Books Management</h1>
         <div ng-view></div>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>

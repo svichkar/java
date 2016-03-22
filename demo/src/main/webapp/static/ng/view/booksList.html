@@ -1,6 +1,16 @@
 <div>
-    <form>
-        Title: <input type="text" required name="title">
-        Author: <input type="text" required name="author">
-    </form>
+    <table>
+        <thead>
+        <th>#</th>
+        <th>Title</th>
+        <th>Author</th>
+        </thead>
+        <tbody>
+        <tr ng-repeat="b in ctrl.books">
+            <td ng-bind="b.id"></td>
+            <td ng-bind="b.title"></td>
+            <td ng-bind="b.author"></td>
+        </tr>
+        </tbody>
+    </table>
 </div>

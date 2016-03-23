@@ -4,10 +4,7 @@ import com.svichkar.model.Book;
 import com.svichkar.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,7 +26,8 @@ public class BooksController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             method = RequestMethod.POST)
-    public void add(Book book) {
+    public void add(@RequestBody Book book) {
+        System.out.println(book.toString());
         repository.save(book);
     }
 
@@ -43,7 +41,7 @@ public class BooksController {
     @RequestMapping(value = "/book/{id}",
             method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@PathVariable Long id, Book book) {
+    public void update(@PathVariable Long id, @RequestBody Book book) {
         repository.save(book);
     }
 

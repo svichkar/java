@@ -30,6 +30,19 @@ App.factory('BookService', ['$http', '$q', function($http, $q){
             							);
             },
 
+		    updateBook: function(id, book) {
+            					return $http.put('book/' + id, book)
+            							.then(
+            									function(response){
+            										return response.data;
+            									},
+            									function(errResponse){
+            										console.error('Error while updating book');
+            										return $q.reject(errResponse);
+            									}
+            							);
+            },
+
 	};
 
 }]);

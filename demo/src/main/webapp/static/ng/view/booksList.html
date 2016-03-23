@@ -1,12 +1,12 @@
 <div>
-    <table>
-        <thead>
+    <table class="table table-hover">
+        <thead class="thead-inverse">
         <th>#</th>
         <th>Title</th>
         <th>Author</th>
         </thead>
         <tbody>
-        <tr ng-repeat="b in ctrl.books">
+        <tr ng-repeat="b in ctrl.books" ng-click="ctrl.edit(b)">
             <td ng-bind="b.id"></td>
             <td ng-bind="b.title"></td>
             <td ng-bind="b.author"></td>

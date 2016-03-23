@@ -3,6 +3,7 @@ package com.svichkar.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,8 +20,10 @@ public class Book {
     @GeneratedValue
     private Long id;
 
+    @Column
     private String title;
 
+    @Column
     private String author;
 
     public Book(String title, String author) {

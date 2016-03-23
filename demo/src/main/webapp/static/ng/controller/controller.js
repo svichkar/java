@@ -6,6 +6,7 @@ App.controller('BookController', ['$scope', 'BookService', '$filter', '$location
                      var self = this;
                      self.books = [];
                      self.book = {};
+                     self.newBook = {};
 
                      self.fetchBooks = function(){
                          BookService.fetchBooks()
@@ -32,7 +33,27 @@ App.controller('BookController', ['$scope', 'BookService', '$filter', '$location
                      };
 
                      self.add = function() {
-                        self.createBook(self.book);
+                        self.createBook(self.newBook);
+                        self.newBook = {};
+                     };
+
+                     self.updateBook = function(id, book){
+                                                      BookService.updateBook(id, book)
+                                                           .then(
+                                                                   self.fetchBooks,
+                                                                   function(errResponse){
+                                                                        console.error('Error while updating book');
+                                                                   }
+                                                            );
+                     };
+
+                     self.commit = function() {
+                        self.updateBook(self.book.id, self.book);
+                     };
+
+                     self.edit = function(book) {
+                        self.book = book;
+                        $location.path("/edit/" + book.id);
                      };
 
 }]);

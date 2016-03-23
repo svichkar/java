@@ -1,7 +1,11 @@
 <div>
-    <form ng-submit="ctrl.add()">
-        Title: <input type="text" required ng-model="ctrl.book.title">
-        Author: <input type="text" required ng-model="ctrl.book.author">
-        <input type="submit" value="Add">
+    <form class="form-inline" ng-submit="ctrl.add()">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" required ng-model="ctrl.newBook.title" id="title">
+            <label for="author">Author</label>
+            <input type="text" required ng-model="ctrl.newBook.author" id="author">
+            <input type="submit" value="Add" class="btn btn-primary">
+        </div>
     </form>
 </div>

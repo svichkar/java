@@ -56,4 +56,19 @@ App.controller('BookController', ['$scope', 'BookService', '$filter', '$location
                         $location.path("/edit/" + book.id);
                      };
 
+                     self.deleteBook = function(id){
+                                                      BookService.deleteBook(id)
+                                                           .then(
+                                                                   self.fetchBooks,
+                                                                   function(errResponse){
+                                                                        console.error('Error while deleting book');
+                                                                   }
+                                                            );
+                     };
+
+                     self.delete = function(id) {
+                        self.deleteBook(id);
+                        $location.path("/");
+                     };
+
 }]);

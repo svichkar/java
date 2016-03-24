@@ -43,6 +43,19 @@ App.factory('BookService', ['$http', '$q', function($http, $q){
             							);
             },
 
+		    deleteBook: function(id) {
+            					return $http.delete('book/' + id)
+            							.then(
+            									function(response){
+            										return response.data;
+            									},
+            									function(errResponse){
+            										console.error('Error while deleting book');
+            										return $q.reject(errResponse);
+            									}
+            							);
+            },
+
 	};
 
 }]);

@@ -6,7 +6,7 @@
         <th>Author</th>
         </thead>
         <tbody>
-        <tr ng-repeat="b in ctrl.books" ng-click="ctrl.edit(b)">
+        <tr ng-repeat="b in ctrl.books" ng-click="ctrl.edit(b)" ng-right-click="ctrl.delete(b.id)">
             <td ng-bind="b.id"></td>
             <td ng-bind="b.title"></td>
             <td ng-bind="b.author"></td>

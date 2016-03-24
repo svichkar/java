@@ -23,7 +23,6 @@ public class BooksController {
     }
 
     @RequestMapping(value = "/book",
-            produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             method = RequestMethod.POST)
     public void add(@RequestBody Book book) {
@@ -32,8 +31,7 @@ public class BooksController {
     }
 
     @RequestMapping(value = "/book/{id}",
-            method = RequestMethod.DELETE,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
+            method = RequestMethod.DELETE)
     public void delete(@PathVariable Long id) {
         repository.delete(id);
     }
@@ -44,6 +42,5 @@ public class BooksController {
     public void update(@PathVariable Long id, @RequestBody Book book) {
         repository.save(book);
     }
-
 
 }

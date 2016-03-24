@@ -16,5 +16,6 @@
         <script src="static/ng/app.js"></script>
         <script src="static/ng/controller/controller.js"></script>
         <script src="static/ng/service/service.js"></script>
+        <script src="static/ng/directive/ngRightClick.js"></script>
 </body>
 </html>

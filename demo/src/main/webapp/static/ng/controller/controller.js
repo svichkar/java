@@ -49,6 +49,7 @@ App.controller('BookController', ['$scope', 'BookService', '$filter', '$location
 
                      self.commit = function() {
                         self.updateBook(self.book.id, self.book);
+                        $location.path("/");
                      };
 
                      self.edit = function(book) {

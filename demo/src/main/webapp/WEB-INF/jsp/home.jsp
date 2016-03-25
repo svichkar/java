@@ -6,7 +6,20 @@
 </head>
 <body ng-app="myApp" class="ng-cloak" ng-controller="BookController as ctrl">
 <h1>Books Management</h1>
-        <br>
+        </br>
+         <div class= "container">
+                <div class="btn-group btn-group-justified">
+                          <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select Action <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li><a href="home#/">Show All Books</a></li>
+                            <li><a href="home#/add">Add New Book</a></li>
+                            <li><a href="home#/uploadFile">Upload Book</a></li>
+                          </ul>
+                </div>
+         </div>
+        </br>
         <div ng-view class="container"></div>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>

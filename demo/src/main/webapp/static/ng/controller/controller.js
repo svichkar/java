@@ -7,6 +7,7 @@ App.controller('BookController', ['$scope', 'BookService', '$filter', '$location
                      self.books = [];
                      self.book = {};
                      self.newBook = {};
+                     self.file;
 
                      self.fetchBooks = function(){
                          BookService.fetchBooks()
@@ -71,5 +72,19 @@ App.controller('BookController', ['$scope', 'BookService', '$filter', '$location
                         self.deleteBook(id);
                         $location.path("/");
                      };
+/*
+                     self.uploadBook = function(file){
+                                                      BookService.uploadBook(file)
+                                                           .then(
+                                                                   self.fetchBooks,
+                                                                   function(errResponse){
+                                                                        console.error('Error while uploading book');
+                                                                   }
+                                                            );
+                     };
+
+                     self.upload = function() {
+                        self.uploadBook(self.file);
+                     };*/
 
 }]);

@@ -55,7 +55,20 @@ App.factory('BookService', ['$http', '$q', function($http, $q){
             									}
             							);
             },
-
+/*
+		    uploadBook: function(file) {
+            					return $http.post('book/upload', file)
+            							.then(
+            									function(response){
+            										return response.data;
+            									},
+            									function(errResponse){
+            										console.error('Error while uploading book');
+            										return $q.reject(errResponse);
+            									}
+            							);
+            },
+*/
 	};
 
 }]);

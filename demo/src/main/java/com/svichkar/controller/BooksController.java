@@ -2,10 +2,14 @@ package com.svichkar.controller;
 
 import com.svichkar.model.Book;
 import com.svichkar.repository.BookRepository;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -43,4 +47,16 @@ public class BooksController {
         repository.save(book);
     }
 
+    @RequestMapping(value = "/book/upload",
+            method = RequestMethod.POST,
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public String upload(@RequestParam(value = "file", required = true) MultipartFile file) throws IOException {
+
+        HSSFWorkbook workbook = new HSSFWorkbook(file.getInputStream());
+        int index = workbook.getActiveSheetIndex();
+        HSSFSheet sheet = workbook.getSheetAt(index);
+        return new String(sheet.getSheetName().getBytes("UTF8"));
+
+    }
 }

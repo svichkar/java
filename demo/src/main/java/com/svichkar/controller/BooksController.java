@@ -2,8 +2,11 @@ package com.svichkar.controller;
 
 import com.svichkar.model.Book;
 import com.svichkar.repository.BookRepository;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -55,8 +58,40 @@ public class BooksController {
 
         HSSFWorkbook workbook = new HSSFWorkbook(file.getInputStream());
         int index = workbook.getActiveSheetIndex();
-        HSSFSheet sheet = workbook.getSheetAt(index);
-        return new String(sheet.getSheetName().getBytes("UTF8"));
+        StringBuilder response = new StringBuilder();
 
+        HSSFSheet sheet = workbook.getSheetAt(index);
+        int max = sheet.getLastRowNum();
+        for (int i = 0; i < max; i++) {
+            HSSFRow row = sheet.getRow(i);
+            for (int j = 0; j < row.getLastCellNum(); j++) {
+                response.append(getPoiCellValue(row.getCell(j)));
+            }
+        }
+        return response.toString();
+    }
+
+    private String getPoiCellValue(HSSFCell cell) {
+
+        String result = "";
+        if (cell != null) {
+            switch (cell.getCellType()) {
+                case Cell.CELL_TYPE_BOOLEAN:
+                    result = String.valueOf(cell.getBooleanCellValue());
+                    break;
+                case Cell.CELL_TYPE_NUMERIC:
+                    result = String.valueOf(cell.getNumericCellValue());
+                    break;
+                case Cell.CELL_TYPE_STRING:
+                    result = cell.getStringCellValue();
+                    break;
+                case Cell.CELL_TYPE_BLANK:
+                    break;
+                case Cell.CELL_TYPE_ERROR:
+                    break;
+            }
+        }
+        return result;
     }
 }
+

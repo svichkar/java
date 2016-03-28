@@ -71,7 +71,7 @@ public class BooksController {
         return response.toString();
     }
 
-    private String getPoiCellValue(HSSFCell cell) {
+    public static String getPoiCellValue(HSSFCell cell) {
 
         String result = "";
         if (cell != null) {

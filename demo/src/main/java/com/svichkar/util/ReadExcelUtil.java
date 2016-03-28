@@ -8,10 +8,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,20 +44,33 @@ public class ReadExcelUtil {
         return titles;
     }
 
-
-    public static HashMap<String, List<String>> readData(File file) throws IOException {
+    public static HashMap<String, List<String>> readData(File file) {
 
         HashMap<String, List<String>> result = new HashMap<>();
-        InputStream inputStream = new FileInputStream(file);
-        String extension = FilenameUtils.getExtension(file.getName());
+        InputStream inputStream;
+        try {
+            inputStream = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
         Workbook workbook;
+        String extension = FilenameUtils.getExtension(file.getName());
         switch (extension.toLowerCase()) {
             case "xls": {
-                workbook = new HSSFWorkbook(inputStream);
+                try {
+                    workbook = new HSSFWorkbook(inputStream);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
             }
             case "xlsx": {
-                workbook = new XSSFWorkbook(inputStream);
+                try {
+                    workbook = new XSSFWorkbook(inputStream);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
             }
             default:
@@ -68,22 +78,48 @@ public class ReadExcelUtil {
         }
 
         Sheet sheet = workbook.getSheetAt(0);
+        for (int i = 0; i < sheet.getRow(0).getLastCellNum(); i++) {
+            final int cellIndex = i;
+            final List<String> value = new ArrayList<>();
+            final String[] key = {""};
+            sheet.forEach((Row row) -> {
+                row.forEach((Cell cell) -> {
 
-        for (int n = 0; n < sheet.getLastRowNum(); n++) {
-            Row row = sheet.getRow(n);
-            List<String> value = new ArrayList<>();
-            for (int col = 0; col < row.getLastCellNum(); col++) {
-                Cell cell = row.getCell(col);
-                result.put(row.getCell(0).getStringCellValue(),  new ArrayList<>());
+                    final int rowIndex = row.getRowNum();
+                    if (cellIndex == cell.getColumnIndex()) {
+                        if (rowIndex == 0) {
+                            key[0] = getCellValue(cell);
+                        } else {
+                            value.add(getCellValue(cell));
+                        }
+                    }
+                });
+                result.put(key[0], value);
+            });
+        }
+        return result;
+    }
+
+    public static String getCellValue(Cell cell) {
+
+        String result = "";
+        if (cell != null) {
+            switch (cell.getCellType()) {
+                case Cell.CELL_TYPE_BOOLEAN:
+                    result = String.valueOf(cell.getBooleanCellValue());
+                    break;
+                case Cell.CELL_TYPE_NUMERIC:
+                    result = String.valueOf(cell.getNumericCellValue());
+                    break;
+                case Cell.CELL_TYPE_STRING:
+                    result = cell.getStringCellValue();
+                    break;
+                case Cell.CELL_TYPE_BLANK:
+                    break;
+                case Cell.CELL_TYPE_ERROR:
+                    break;
             }
         }
-
-        sheet.forEach((Row row) -> {
-
-
-            });
-
-
-            return result;
+        return result;
     }
 }

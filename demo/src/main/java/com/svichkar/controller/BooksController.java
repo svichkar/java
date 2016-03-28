@@ -2,11 +2,10 @@ package com.svichkar.controller;
 
 import com.svichkar.model.Book;
 import com.svichkar.repository.BookRepository;
-import org.apache.poi.hssf.usermodel.HSSFCell;
+import com.svichkar.util.ReadExcelUtil;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -65,33 +64,11 @@ public class BooksController {
         for (int i = 0; i < max; i++) {
             HSSFRow row = sheet.getRow(i);
             for (int j = 0; j < row.getLastCellNum(); j++) {
-                response.append(getPoiCellValue(row.getCell(j)));
+                response.append(ReadExcelUtil.getCellValue(row.getCell(j)));
             }
         }
         return response.toString();
     }
 
-    public static String getPoiCellValue(HSSFCell cell) {
-
-        String result = "";
-        if (cell != null) {
-            switch (cell.getCellType()) {
-                case Cell.CELL_TYPE_BOOLEAN:
-                    result = String.valueOf(cell.getBooleanCellValue());
-                    break;
-                case Cell.CELL_TYPE_NUMERIC:
-                    result = String.valueOf(cell.getNumericCellValue());
-                    break;
-                case Cell.CELL_TYPE_STRING:
-                    result = cell.getStringCellValue();
-                    break;
-                case Cell.CELL_TYPE_BLANK:
-                    break;
-                case Cell.CELL_TYPE_ERROR:
-                    break;
-            }
-        }
-        return result;
-    }
 }
 

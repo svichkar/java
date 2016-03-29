@@ -7,7 +7,7 @@ App.controller('BookController', ['$scope', 'BookService', '$filter', '$location
                      self.books = [];
                      self.book = {};
                      self.newBook = {};
-                     self.file;
+                     self.myFile;
 
                      self.fetchBooks = function(){
                          BookService.fetchBooks()
@@ -72,7 +72,7 @@ App.controller('BookController', ['$scope', 'BookService', '$filter', '$location
                         self.deleteBook(id);
                         $location.path("/");
                      };
-/*
+
                      self.uploadBook = function(file){
                                                       BookService.uploadBook(file)
                                                            .then(
@@ -84,7 +84,8 @@ App.controller('BookController', ['$scope', 'BookService', '$filter', '$location
                      };
 
                      self.upload = function() {
-                        self.uploadBook(self.file);
-                     };*/
+                        self.uploadBook(self.myFile);
+                        $location.path("/");
+                     };
 
 }]);

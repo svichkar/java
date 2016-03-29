@@ -3,15 +3,13 @@ package com.svichkar.controller;
 import com.svichkar.model.Book;
 import com.svichkar.repository.BookRepository;
 import com.svichkar.util.ReadExcelUtil;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -49,25 +47,32 @@ public class BooksController {
         repository.save(book);
     }
 
+    @RequestMapping(value = "/book/uploadSimple",
+            method = RequestMethod.POST,
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public String upload(@RequestParam(value = "file") MultipartFile file) throws IOException {
+
+        HashMap<String, List<String>> data = ReadExcelUtil.readData(file);
+        StringBuilder response = new StringBuilder();
+        data.forEach((String key, List<String> value) -> {
+            response.append("Data for ").append(key).append(" column:\n");
+            value.forEach((String val) -> response.append(val).append("\n"));
+        });
+        return response.toString();
+    }
+
     @RequestMapping(value = "/book/upload",
             method = RequestMethod.POST,
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public String upload(@RequestParam(value = "file", required = true) MultipartFile file) throws IOException {
+    public void uploadToDB(@RequestParam(value = "file") MultipartFile file) throws IOException {
 
-        HSSFWorkbook workbook = new HSSFWorkbook(file.getInputStream());
-        int index = workbook.getActiveSheetIndex();
-        StringBuilder response = new StringBuilder();
+        HashMap<String, List<String>> data = ReadExcelUtil.readData(file);
+        List<String> titles = data.get("TITLE");
+        List<String> authors = data.get("AUTHOR");
 
-        HSSFSheet sheet = workbook.getSheetAt(index);
-        int max = sheet.getLastRowNum();
-        for (int i = 0; i < max; i++) {
-            HSSFRow row = sheet.getRow(i);
-            for (int j = 0; j < row.getLastCellNum(); j++) {
-                response.append(ReadExcelUtil.getCellValue(row.getCell(j)));
-            }
-        }
-        return response.toString();
+        titles.forEach((title) ->  repository.saveAndFlush(new Book(title, authors.get(titles.indexOf(title)))));
     }
 
 }

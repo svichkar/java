@@ -55,7 +55,7 @@ App.factory('BookService', ['$http', '$q', function($http, $q){
             									}
             							);
             },
-/*
+
 		    uploadBook: function(file) {
             					return $http.post('book/upload', file)
             							.then(
@@ -68,7 +68,7 @@ App.factory('BookService', ['$http', '$q', function($http, $q){
             									}
             							);
             },
-*/
+
 	};
 
 }]);

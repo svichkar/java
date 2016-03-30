@@ -11,7 +11,7 @@
             <td ng-bind="b.title"></td>
             <td ng-bind="b.author"></td>
         </tr>
-        <tr>
+        <tr ng-click="ctrl.export()">
             <td colspan="3"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Download</td>
         </tr>
         </tbody>

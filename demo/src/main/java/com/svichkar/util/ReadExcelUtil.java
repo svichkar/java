@@ -1,5 +1,6 @@
 package com.svichkar.util;
 
+import com.svichkar.model.Book;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -134,7 +135,7 @@ public class ReadExcelUtil {
         return readData(file).keySet();
     }
 
-    public static String getCellValue(Cell cell) {
+    private static String getCellValue(Cell cell) {
 
         String result = "";
         if (cell != null) {
@@ -155,5 +156,29 @@ public class ReadExcelUtil {
             }
         }
         return result;
+    }
+
+    public static Workbook prepareWorkBook(List<Book> data) throws IOException {
+
+        String[] titles = {"ID", "TITLE", "AUTHOR"};
+
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("All Books");
+
+        //create row with titles
+        Row row = sheet.createRow(0);
+        for (int i = 0; i < titles.length; i++) {
+            row.createCell(i).setCellValue(titles[i]);
+        }
+
+        //fill all rows with data
+        data.forEach((Book b) -> {
+            Row r = sheet.createRow(data.indexOf(b) + 1);
+            r.createCell(0).setCellValue(b.getId());
+            r.createCell(1).setCellValue(b.getTitle());
+            r.createCell(2).setCellValue(b.getAuthor());
+        });
+
+        return workbook;
     }
 }

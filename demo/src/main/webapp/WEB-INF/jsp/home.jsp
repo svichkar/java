@@ -31,5 +31,6 @@
         <script src="static/ng/controller/controller.js"></script>
         <script src="static/ng/service/service.js"></script>
         <script src="static/ng/directive/ngRightClick.js"></script>
+        <script src="static/ng/directive/fileModel.js"></script>
 </body>
 </html>

@@ -57,7 +57,12 @@ App.factory('BookService', ['$http', '$q', function($http, $q){
             },
 
 		    uploadBook: function(file) {
-            					return $http.post('book/upload', file)
+		                        var fd = new FormData();
+                                fd.append('file', file);
+            					return $http.post('book/upload', fd, {
+                                       transformRequest: angular.identity,
+                                       headers: {'Content-Type': undefined}
+                                })
             							.then(
             									function(response){
             										return response.data;

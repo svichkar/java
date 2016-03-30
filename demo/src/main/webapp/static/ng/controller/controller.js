@@ -36,6 +36,7 @@ App.controller('BookController', ['$scope', 'BookService', '$filter', '$location
                      self.add = function() {
                         self.createBook(self.newBook);
                         self.newBook = {};
+                        $location.path("/");
                      };
 
                      self.updateBook = function(id, book){

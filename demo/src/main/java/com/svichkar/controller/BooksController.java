@@ -4,16 +4,13 @@ import com.svichkar.model.Book;
 import com.svichkar.repository.BookRepository;
 import com.svichkar.util.ReadExcelUtil;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
@@ -78,20 +75,19 @@ public class BooksController {
         List<String> titles = data.get("TITLE");
         List<String> authors = data.get("AUTHOR");
 
-        titles.forEach((title) ->  repository.saveAndFlush(new Book(title, authors.get(titles.indexOf(title)))));
+        titles.forEach((title) -> repository.saveAndFlush(new Book(title, authors.get(titles.indexOf(title)))));
     }
 
     @RequestMapping(value = "/book/download",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public void download (HttpServletResponse response) throws IOException {
+            method = RequestMethod.GET)
+    public void download(HttpServletResponse response) throws IOException {
 
         List books = repository.findAll();
         Workbook workBook = ReadExcelUtil.prepareWorkBook(books);
-        InputStream inputStream = new FileInputStream("books.xlsx");
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setHeader("Content-disposition", "attachment; filename=boooks.xlsx");
         OutputStream outputStream = response.getOutputStream();
         workBook.write(outputStream);
-        IOUtils.copy(inputStream, outputStream);
         response.flushBuffer();
     }
 }

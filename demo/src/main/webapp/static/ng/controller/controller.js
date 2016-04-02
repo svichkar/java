@@ -89,4 +89,18 @@ App.controller('BookController', ['$scope', 'BookService', '$filter', '$location
                         $location.path("/");
                      };
 
+                     self.downloadBooks = function() {
+                                                        BookService.downloadBooks()
+                                                        .then(
+                                                        function (errResponse) {
+                                                        console.error('Error while downloading books');
+                                                        }
+                                                        )
+                     }
+
+                     self.export = function () {
+                        self.downloadBooks();
+                        $location.path("/");
+                     }
+
 }]);

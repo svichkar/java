@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
 </head>
 <body ng-app="myApp" class="ng-cloak" ng-controller="BookController as ctrl">
-<h1>Books Management</h1>
+<h1 class="title">Books Management</h1>
         </br>
          <div class= "container">
                 <div class="btn-group btn-group-justified">

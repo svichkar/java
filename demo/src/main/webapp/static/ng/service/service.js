@@ -72,20 +72,7 @@ App.factory('BookService', ['$http', '$q', function($http, $q){
             										return $q.reject(errResponse);
             									}
             							);
-            },
-
-		    downloadBooks: function() {
-            					return $http.get('book/download')
-            							.then(
-            									function(response){
-            										return response.data;
-            									},
-            									function(errResponse){
-            										console.error('Error while downloading books');
-            										return $q.reject(errResponse);
-            									}
-            							);
-            },
+            }
 
 	};
 

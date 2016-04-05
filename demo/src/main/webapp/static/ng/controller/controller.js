@@ -1,7 +1,7 @@
 "use strict";
 
-App.controller('BookController', ['$scope', 'BookService', '$filter', '$location', '$routeParams',
-                                  function($scope, BookService, $filter, $location, $routeParams) {
+App.controller('BookController', ['$scope', 'BookService', '$filter', '$location', '$routeParams', '$window',
+                                  function($scope, BookService, $filter, $location, $routeParams, $window) {
 
                      var self = this;
                      self.books = [];
@@ -89,17 +89,9 @@ App.controller('BookController', ['$scope', 'BookService', '$filter', '$location
                         $location.path("/");
                      };
 
-                     self.downloadBooks = function() {
-                                                        BookService.downloadBooks()
-                                                        .then(
-                                                        function (errResponse) {
-                                                        console.error('Error while downloading books');
-                                                        }
-                                                        )
-                     }
-
                      self.export = function () {
-                        self.downloadBooks();
+                        //execute GET request here
+                        window.location.pathname='/book/download';
                         $location.path("/");
                      }
 

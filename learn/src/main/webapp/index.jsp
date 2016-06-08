@@ -4,7 +4,7 @@
 </head>
 
 <body>
-<h2>ZALUPA!!!!</h2>
+<h2>Hey!!!!</h2>
 <a href="static/html/main.html">Link here</a>
 </body>
 </html>

@@ -7,35 +7,21 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
-import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Created by konstantin on 6/7/2016.
+ * Created by konstantin on 6/29/2016.
  */
-
 @Configuration
-@EnableWebMvc
-@ComponentScan("com.svichkar")
 @EnableTransactionManagement
-public class ApplicationContextConfig {
-
-    @Bean(name = "viewResolver")
-    public InternalResourceViewResolver getViewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("/WEB-INF/views/");
-        viewResolver.setSuffix(".jsp");
-        return viewResolver;
-    }
+public class SpringRootConfig {
 
     @Bean(name = "dataSource")
     public DataSource getDataSource() {
@@ -48,13 +34,21 @@ public class ApplicationContextConfig {
     }
 
     @Autowired
-    @Bean(name = "sessionFactory")
+    @Bean(name = {"sessionFactory"})
     public SessionFactory getSessionFactory(DataSource dataSource) {
 
         LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
         sessionBuilder.scanPackages("com.svichkar.model");
         sessionBuilder.addProperties(getHibernateProperties());
         return sessionBuilder.buildSessionFactory();
+    }
+
+    @Bean(name = "transactionManager")
+    public HibernateTransactionManager txName() throws IOException {
+        HibernateTransactionManager txName = new HibernateTransactionManager();
+        txName.setSessionFactory(getSessionFactory(getDataSource()));
+        txName.setDataSource(getDataSource());
+        return txName;
     }
 
     private Properties getHibernateProperties() {
@@ -65,7 +59,4 @@ public class ApplicationContextConfig {
         properties.put("hibernate.hbm2ddl.auto", "create");
         return properties;
     }
-
-    //http://devcolibri.com/3732
-    //http://www.codejava.net/frameworks/spring/spring-4-and-hibernate-4-integration-tutorial-part-2-java-based-configuration
 }

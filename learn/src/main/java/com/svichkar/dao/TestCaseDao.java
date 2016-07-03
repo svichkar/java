@@ -1,7 +1,8 @@
 package com.svichkar.dao;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 import com.svichkar.model.TestCase;
+
+import java.util.List;
 
 /**
  * Created by svichkar on 6/8/2016.

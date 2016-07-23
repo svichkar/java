@@ -8,7 +8,8 @@ require.config({
        backbone: 'libs/backbone/backbone-min',
        require: 'libs/require/require',
        underscore: 'libs/underscore/underscore-min',
-       text: 'libs/jquery/text'
+       text: 'libs/jquery/text',
+       tbone: 'libs/tbone/tbone-2.0.0.min'
    }
 });
 

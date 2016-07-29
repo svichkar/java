@@ -3,7 +3,7 @@ define(['backbone', 'models/mainModel'], function (Backbone, MainModel) {
         model: MainModel,
         url: 'json/response.json',
         parse: function (data) {
-            return data.result;
+            return data;
         }
     });
     return Col;

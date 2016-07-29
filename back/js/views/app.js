@@ -16,13 +16,7 @@ define(['jquery', 'backbone', 'views/view', 'models/mainModel', 'collections/col
         },
         render: function () {
             console.log('data is fetching');
-            var elem = $(this.el);
-            this.col.each(function (model) {
-
-                console.log(model.get("content"));
-                var view = new ViewView({model: model});
-                elem.append(view.el);
-            })
+            var view = new ViewView();
         }
     });
     return AppView;

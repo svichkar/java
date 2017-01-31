@@ -1,8 +1,6 @@
 package com.connecture.rest;
 
 import javax.ws.rs.core.Response;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.UnmarshalException;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import com.connecture.domain.CreateRenewalRequest;
-import com.connecture.insureadvantage.sgrenewals.model.FeedRenewalQuoteInfo;
 import com.connecture.service.IbrLoaderService;
-
+import com.connecture.util.XmlUnmarshaller;
 
 @RestController
 public class IbrLoaderController
@@ -35,22 +31,7 @@ public class IbrLoaderController
   public Object loadIbr(@RequestParam(value = "endpoint") String endpoint,
       @RequestParam(value = "file") MultipartFile file) throws Exception
   {
-    try
-    {
-      FeedRenewalQuoteInfo quoteInfo = (FeedRenewalQuoteInfo) JAXBContext
-          .newInstance(FeedRenewalQuoteInfo.class)
-          .createUnmarshaller()
-          .unmarshal(file.getInputStream());
-      return quoteInfo;
-    }
-    catch (UnmarshalException e)
-    {
-      CreateRenewalRequest req = (CreateRenewalRequest) JAXBContext
-          .newInstance(CreateRenewalRequest.class)
-          .createUnmarshaller()
-          .unmarshal(file.getInputStream());
-      return req;
-    }
+    return XmlUnmarshaller.unmarshal(file);
   }
 
   @RequestMapping(value = "/loadIbr",

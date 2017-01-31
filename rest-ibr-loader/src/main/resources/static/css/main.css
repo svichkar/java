@@ -3,12 +3,16 @@ body {
     padding:0;
 }
 header {
-    height: 75px;
-    background: url("/img/background.png");
+    height: 175px;
+    background: url("/img/background.png") no-repeat center;
     background-size: cover;
 }
 
 section {
     width: 50%;
     margin: auto;
+}
+
+.footer {
+    text-align: center;
 }

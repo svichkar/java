@@ -1,4 +1,4 @@
-package com.connecture.service;
+package com.connecture.util.service;
 
 import org.springframework.stereotype.Service;
 

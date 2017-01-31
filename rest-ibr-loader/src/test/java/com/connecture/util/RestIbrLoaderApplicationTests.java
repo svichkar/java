@@ -1,4 +1,4 @@
-package com.connecture;
+package com.connecture.util;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

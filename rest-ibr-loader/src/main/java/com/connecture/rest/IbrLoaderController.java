@@ -1,10 +1,10 @@
 package com.connecture.rest;
 
-import javax.ws.rs.client.Client;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
-import org.glassfish.jersey.client.JerseyClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -25,18 +25,27 @@ public class IbrLoaderController
   private String user;
   @Value("${auth.password}")
   private String password;
+  @Value("${periods.path}")
+  private String periodsUrl;
+  @Value("${inbound.path}")
+  private String inboundUrl;
 
   @Autowired
   private IbrLoaderService ibrLoaderService;
+
+  private RestClient rc = new RestClient(user, password);
 
   @RequestMapping(value = "/loadIbr",
       method = RequestMethod.POST,
       consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  public Object loadIbr(@RequestParam(value = "endpoint") String endpoint,
+  public Object loadIbr(@RequestParam(value = "endpoint") String renewalPeriodXref,
+      /*@RequestParam(value = "endpoint") String endpoint,*/
       @RequestParam(value = "file") MultipartFile file) throws Exception
   {
-    return XmlUnmarshaller.unmarshal(file);
+    List<String> paths = Arrays.asList(periodsUrl, renewalPeriodXref, inboundUrl);
+    return rc.post(endpointUrl, paths, XmlUnmarshaller.unmarshal(file))
+        .readEntity(String.class);
   }
 
   @RequestMapping(value = "/loadIbr",
@@ -50,9 +59,8 @@ public class IbrLoaderController
   @RequestMapping(value = "/test",
       method = RequestMethod.GET,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  public Response test() throws IOException
+  public String test() throws IOException
   {
-    RestClient rc = new RestClient(user, password);
-    return rc.get();
+    return rc.get().readEntity(String.class);
   }
 }

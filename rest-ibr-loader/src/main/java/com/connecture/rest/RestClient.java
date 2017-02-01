@@ -3,8 +3,11 @@ package com.connecture.rest;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import java.util.List;
 
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
@@ -24,10 +27,9 @@ public class RestClient
     client = ClientBuilder.newClient(clientConfig);
   }
 
-  public Response post(Object entity)
+  public Response post(String endpoint, List<String> paths, Object entity)
   {
-    return client.target("http://localhost:7777/JerseyDemos/rest")
-        .path("employees")
+    return constructTargetUrl(endpoint, paths)
         .request(MediaType.APPLICATION_JSON)
         .header(CNX_SERVER_AUTH, true)
         .post(Entity.xml(entity));
@@ -39,5 +41,12 @@ public class RestClient
         .request(MediaType.APPLICATION_JSON)
         .header(CNX_SERVER_AUTH, true)
         .get();
+  }
+
+  private WebTarget constructTargetUrl (String endpoint, List<String> paths)
+  {
+    WebTarget target = client.target(endpoint);
+    paths.forEach(target::path);
+    return target;
   }
 }

@@ -29,8 +29,6 @@ public class IbrLoaderController
   @Autowired
   private IbrLoaderService ibrLoaderService;
 
-  private RestClient rc;
-
   @RequestMapping(value = "/loadIbr",
       method = RequestMethod.POST,
       consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
@@ -54,7 +52,7 @@ public class IbrLoaderController
       produces = MediaType.APPLICATION_JSON_VALUE)
   public Response test() throws IOException
   {
-    rc = new RestClient(user, password);
+    RestClient rc = new RestClient(user, password);
     return rc.get();
   }
 }

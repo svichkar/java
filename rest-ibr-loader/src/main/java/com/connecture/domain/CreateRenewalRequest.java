@@ -2,16 +2,14 @@ package com.connecture.domain;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlList;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 import com.connecture.insureadvantage.sgrenewals.model.FeedRenewalQuoteInfo;
+import com.connecture.insureadvantage.sgrenewals.model.RenewalPeriodInfo;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(
@@ -20,6 +18,10 @@ import com.connecture.insureadvantage.sgrenewals.model.FeedRenewalQuoteInfo;
 )
 public class CreateRenewalRequest implements Serializable
 {
+  @XmlElement(name = "RenewalPeriodInfo",
+      namespace = "http://www.connecture.com/sgrenewals")
+  private RenewalPeriodInfo renewalPeriodInfo;
+
   @XmlElement(name = "FeedRenewalQuoteInfo",
       namespace = "http://www.connecture.com/sgrenewals")
   private List<FeedRenewalQuoteInfo> feedRenewalQuoteInfos;
@@ -36,6 +38,16 @@ public class CreateRenewalRequest implements Serializable
   public void setFeedRenewalQuoteInfos(List<FeedRenewalQuoteInfo> feedRenewalQuoteInfos)
   {
     this.feedRenewalQuoteInfos = feedRenewalQuoteInfos;
+  }
+
+  public RenewalPeriodInfo getRenewalPeriodInfo()
+  {
+    return renewalPeriodInfo;
+  }
+
+  public void setRenewalPeriodInfo(RenewalPeriodInfo renewalPeriodInfo)
+  {
+    this.renewalPeriodInfo = renewalPeriodInfo;
   }
 
   @Override

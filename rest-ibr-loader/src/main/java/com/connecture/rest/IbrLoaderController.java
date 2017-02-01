@@ -1,8 +1,10 @@
 package com.connecture.rest;
 
+import javax.ws.rs.client.Client;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 
+import org.glassfish.jersey.client.JerseyClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -17,12 +19,17 @@ import com.connecture.util.XmlUnmarshaller;
 @RestController
 public class IbrLoaderController
 {
-
   @Value("${endpoint.url}")
   private String endpointUrl;
+  @Value("${auth.user}")
+  private String user;
+  @Value("${auth.password}")
+  private String password;
 
   @Autowired
-  IbrLoaderService ibrLoaderService;
+  private IbrLoaderService ibrLoaderService;
+
+  private RestClient rc;
 
   @RequestMapping(value = "/loadIbr",
       method = RequestMethod.POST,
@@ -40,5 +47,14 @@ public class IbrLoaderController
   public Response loadIbr() throws IOException
   {
     return Response.ok().build();
+  }
+
+  @RequestMapping(value = "/test",
+      method = RequestMethod.GET,
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  public Response test() throws IOException
+  {
+    rc = new RestClient(user, password);
+    return rc.get();
   }
 }

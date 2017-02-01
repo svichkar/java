@@ -20,7 +20,7 @@ public class XmlUnmarshaller
     try
     {
       LOGGER.info("Trying to parse XML into FeedRenewalQuoteInfo object.");
-      return getUnmarshaller(FeedRenewalQuoteInfo.class).unmarshal(file.getInputStream());
+      return (FeedRenewalQuoteInfo) getUnmarshaller(FeedRenewalQuoteInfo.class).unmarshal(file.getInputStream());
     }
     catch (JAXBException | IOException e1)
     {
@@ -28,7 +28,7 @@ public class XmlUnmarshaller
       try
       {
         LOGGER.info("Trying to parse XML into CreateRenewalRequest object.");
-        return getUnmarshaller(CreateRenewalRequest.class).unmarshal(file.getInputStream());
+        return (CreateRenewalRequest) getUnmarshaller(CreateRenewalRequest.class).unmarshal(file.getInputStream());
       }
       catch (JAXBException | IOException e2)
       {

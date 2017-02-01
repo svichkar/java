@@ -12,17 +12,14 @@ import org.glassfish.jersey.jackson.JacksonFeature;
 
 public class RestClient
 {
-  private ClientConfig clientConfig;
   private Client client;
-  private HttpAuthenticationFeature feature;
-
   private static final String CNX_SERVER_AUTH = "CNX-Server-Auth";
 
   public RestClient(String user, String password)
   {
-    clientConfig = new ClientConfig();
-    feature = HttpAuthenticationFeature.basic(user, password);
-    clientConfig.register(feature) ;
+    ClientConfig clientConfig = new ClientConfig();
+    HttpAuthenticationFeature feature = HttpAuthenticationFeature.basic(user, password);
+    clientConfig.register(feature).register(JacksonFeature.class);
     clientConfig.register(JacksonFeature.class);
     client = ClientBuilder.newClient(clientConfig);
   }

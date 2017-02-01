@@ -2,6 +2,7 @@ package com.connecture.util;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import java.io.IOException;
 
 import org.slf4j.Logger;
@@ -19,10 +20,7 @@ public class XmlUnmarshaller
     try
     {
       LOGGER.info("Trying to parse XML into FeedRenewalQuoteInfo object.");
-      return (FeedRenewalQuoteInfo) JAXBContext
-          .newInstance(FeedRenewalQuoteInfo.class)
-          .createUnmarshaller()
-          .unmarshal(file.getInputStream());
+      return getUnmarshaller(FeedRenewalQuoteInfo.class).unmarshal(file.getInputStream());
     }
     catch (JAXBException | IOException e1)
     {
@@ -30,10 +28,7 @@ public class XmlUnmarshaller
       try
       {
         LOGGER.info("Trying to parse XML into CreateRenewalRequest object.");
-        return (CreateRenewalRequest) JAXBContext
-            .newInstance(CreateRenewalRequest.class)
-            .createUnmarshaller()
-            .unmarshal(file.getInputStream());
+        return getUnmarshaller(CreateRenewalRequest.class).unmarshal(file.getInputStream());
       }
       catch (JAXBException | IOException e2)
       {
@@ -41,5 +36,10 @@ public class XmlUnmarshaller
         return null;
       }
     }
+  }
+
+  private static Unmarshaller getUnmarshaller(Class tClass) throws JAXBException
+  {
+    return JAXBContext.newInstance(tClass).createUnmarshaller();
   }
 }

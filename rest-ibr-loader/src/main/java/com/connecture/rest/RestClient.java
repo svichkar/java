@@ -19,7 +19,7 @@ public class RestClient
   {
     ClientConfig clientConfig = new ClientConfig();
     HttpAuthenticationFeature feature = HttpAuthenticationFeature.basic(user, password);
-    clientConfig.register(feature).register(JacksonFeature.class);
+    clientConfig.register(feature);
     clientConfig.register(JacksonFeature.class);
     client = ClientBuilder.newClient(clientConfig);
   }

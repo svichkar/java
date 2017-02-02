@@ -10,7 +10,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.connecture.domain.CreateRenewalRequest;
+import com.connecture.insureadvantage.sgrenewals.model.RenewalPeriodInfo;
 import com.connecture.service.IbrLoaderService;
 import com.connecture.util.XmlUnmarshaller;
 
@@ -47,9 +47,10 @@ public class IbrLoaderController
     Response response = ibrLoaderService.createRenewalPeriod(ibrObject.getRenewalPeriodInfo());
     if (HttpStatus.OK.value() != response.getStatus())
     {
-      LOGGER.info("Renewal period was not created. Response:\n {}", response.toString());
+      LOGGER.warn("Renewal period was not created. Response:\n {}", response.readEntity(String.class));
       return new ArrayList<>();
     }
+    RenewalPeriodInfo newRNP = response.readEntity(RenewalPeriodInfo.class);
     LOGGER.info("Creating Renewal Quotes. Total count: {}", ibrObject.getFeedRenewalQuoteInfos().size());
     return ibrObject.getFeedRenewalQuoteInfos().stream()
         .map(quote -> ibrLoaderService.createRenewalQuote(renewalPeriodXref, quote))

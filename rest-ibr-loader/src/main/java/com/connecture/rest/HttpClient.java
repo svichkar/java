@@ -7,6 +7,8 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Feature;
+import javax.ws.rs.core.FeatureContext;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -14,8 +16,10 @@ import java.util.List;
 
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
+import org.glassfish.jersey.jackson.JacksonFeature;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import com.connecture.insureadvantage.sgrenewals.model.RenewalPeriodInfo;
 import com.connecture.provider.CustomJsonProvider;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
@@ -36,8 +40,7 @@ public class HttpClient
 
   public HttpClient(String user, String password)
   {
-    JacksonJsonProvider jacksonJsonProvider = new CustomJsonProvider()
-        .configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
+    CustomJsonProvider jacksonJsonProvider = new CustomJsonProvider();
     ClientConfig clientConfig = new ClientConfig(jacksonJsonProvider);
     clientConfig.register(HttpAuthenticationFeature.basic(user, password));
     client = ClientBuilder.newClient(clientConfig);
@@ -45,7 +48,7 @@ public class HttpClient
 
   public Response post(String endpoint, List<String> paths, Entity entity)
   {
-    return constructTargetUrl(endpoint, paths).request(MediaType.APPLICATION_JSON)
+    return constructTargetUrl(endpoint, paths).request(MediaType.APPLICATION_JSON_TYPE)
         .header(CNX_SERVER_AUTH, true)
         .post(entity);
   }

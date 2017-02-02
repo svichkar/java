@@ -3,9 +3,11 @@ package com.connecture.service;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
+import java.util.Collections;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.connecture.insureadvantage.sgrenewals.model.FeedRenewalQuoteInfo;
@@ -16,33 +18,35 @@ import com.connecture.rest.HttpClient;
 public class IbrLoaderService
 {
   private static final Logger LOGGER = LoggerFactory.getLogger(IbrLoaderService.class);
-  private static final String STATUS_OPEN = "Open";
+  private static final String STATUS_OPEN = "OPEN";
 
   @Value("${endpoint.url}")
   private String endpointUrl;
-  @Value("${auth.user}")
-  private String user;
-  @Value("${auth.password}")
-  private String password;
   @Value("${periods.path}")
   private String periodsUrl;
   @Value("${inbound.path}")
   private String inboundUrl;
+  private final HttpClient httpClient;
 
-  private final HttpClient httpClient = new HttpClient(user, password);
+  @Autowired
+  public IbrLoaderService (HttpClient httpClient)
+  {
+    this.httpClient = new HttpClient(httpClient.getUser(), httpClient.getPassword());
+  }
 
   public Response createRenewalPeriod(RenewalPeriodInfo periodInfo)
   {
-    LOGGER.info("Creating Renewal Period... Renewal Period: {0}", periodInfo.toString());
     periodInfo.setStatus(STATUS_OPEN);
-    return httpClient.post(endpointUrl, Arrays.asList(periodsUrl), Entity.json(periodInfo));
+    LOGGER.info("Creating Renewal Period... Renewal Period: {}", periodInfo.toString());
+    return httpClient.post(endpointUrl, Collections.singletonList(periodsUrl), Entity.json(periodInfo));
   }
 
   public Response createRenewalQuote(String renewalPeriodXref, FeedRenewalQuoteInfo renewalQuoteInfo)
   {
-    LOGGER.info("Creating Renewal Quote... Renewal Period: {0}; group ID: {1}; quote ID: {2}",
+    LOGGER.info("Creating Renewal Quote... Renewal Period: {}; group ID: {}; quote ID: {}",
         renewalPeriodXref, renewalQuoteInfo.getGroup().getID(), renewalQuoteInfo.getQuote().getID());
     return httpClient.post(endpointUrl,
-        Arrays.asList(periodsUrl, renewalPeriodXref, inboundUrl), Entity.xml(renewalQuoteInfo));
+        Arrays.asList(periodsUrl, renewalPeriodXref, inboundUrl),
+        Entity.xml(renewalQuoteInfo));
   }
 }

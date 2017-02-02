@@ -27,17 +27,6 @@ public class IbrLoaderController
 {
   private static final Logger LOGGER = LoggerFactory.getLogger(IbrLoaderController.class);
 
-  @Value("${endpoint.url}")
-  private String endpointUrl;
-  @Value("${auth.user}")
-  private String user;
-  @Value("${auth.password}")
-  private String password;
-  @Value("${periods.path}")
-  private String periodsUrl;
-  @Value("${inbound.path}")
-  private String inboundUrl;
-
   @Autowired
   private IbrLoaderService ibrLoaderService;
 
@@ -50,14 +39,18 @@ public class IbrLoaderController
       @RequestParam(value = "file") MultipartFile file) throws Exception
   {
     CreateRenewalRequest ibrObject = (CreateRenewalRequest) XmlUnmarshaller.unmarshal(file);
-    LOGGER.info("Creating renewal period:\n {0}", ibrObject.getRenewalPeriodInfo().toString());
+    if (ibrObject == null)
+    {
+      LOGGER.info("IBR file can't be parsed. Please check if it is valid");
+      return new ArrayList<>();
+    }
     Response response = ibrLoaderService.createRenewalPeriod(ibrObject.getRenewalPeriodInfo());
     if (HttpStatus.OK.value() != response.getStatus())
     {
-      LOGGER.info("Renewal period was not created. Response:\n {0}", response.toString());
+      LOGGER.info("Renewal period was not created. Response:\n {}", response.toString());
       return new ArrayList<>();
     }
-    LOGGER.info("Creating Renewal Quotes");
+    LOGGER.info("Creating Renewal Quotes. Total count: {}", ibrObject.getFeedRenewalQuoteInfos().size());
     return ibrObject.getFeedRenewalQuoteInfos().stream()
         .map(quote -> ibrLoaderService.createRenewalQuote(renewalPeriodXref, quote))
         .collect(toList());

@@ -4,6 +4,7 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,9 @@ public class IbrLoaderService
   private String periodsUrl;
   @Value("${inbound.path}")
   private String inboundUrl;
+  @Value("#{'${endpoint.url.list}'.split(',')}")
+  private List<String> endpointUrls;
+
   private final HttpClient httpClient;
 
   @Autowired

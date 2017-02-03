@@ -3,41 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>REST IBR uploader</title>
-    <link rel="stylesheet" type="text/css" href="css/main.css">
     <script rel="script" src="js/main.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
 <h1>IBR files loader via REST requests</h1>
-<div class="panel-group" id="accordion">
-    <div class="panel panel-default" id="panel1">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-target="#collapseOne"
-                   href="#collapseOne">Create new Renewal Period</a>
-            </h4>
+<ul>
+    <li>
+        <input type="checkbox">
+        <i></i>
+        <h2>Create Renewal Period</h2>
+        <div class="form-input">
+            <form class="form-horizontal" enctype="multipart/form-data" method="post" action="/loadIbr">
+                <div class="form-group">
+                    <label for="shortDescription">Short Description:</label>
+                    <input type="text" id="shortDescription" name="shortDescription">
+                    <label for="longDescription">Long Description:</label>
+                    <input type="text" id="longDescription" name="longDescription">
+                    <label for="xref">Xref:</label>
+                    <input type="text" name="xref">
+                    <input type="submit" class="btn btn-primary" value="Proceed">
+                </div>
+            </form>
         </div>
-        <div id="collapseOne" class="panel-collapse collapse in">
-            <div class="panel-body">
-                <form class="form-horizontal" enctype="multipart/form-data" method="post" action="/loadIbr">
-                    <div class="form-group">
-                        <label for="endpoint">Provide endpoint:</label>
-                        <input type="text" id="endpoint" name="endpoint">
-                        <label for="fileInput">Chose IBR file:</label>
-                        <input type="file" name="file" id="fileInput"
-                               accept="application/xml">
-                        <input type="submit" class="btn btn-primary" value="Proceed">
-                    </div>
-                </form>
-            </div>
+    </li>
+    <li>
+        <input type="checkbox" checked>
+        <i></i>
+        <h2>Load IBR for existing Renewal Period</h2>
+        <div class="form-input">
+            <form class="form-horizontal" enctype="multipart/form-data" method="post" action="/loadIbr">
+                <div class="form-group">
+                    <label for="xref">Renewal Period Xref:</label>
+                    <input type="text" id="xref" name="xref">
+                    <label for="fileInput">Chose IBR file:</label>
+                    <input type="file" name="file" id="fileInput"
+                           accept="application/xml">
+                    <input type="submit" class="btn btn-primary" value="Proceed">
+                </div>
+            </form>
         </div>
-    </div>
-</div>
+    </li>
+    <li>
+        <input type="checkbox" checked>
+        <i></i>
+        <h2>Load full IBR file <p>(based on provided renewal period and group/quote info)</p></h2>
+        <div class="form-input">
+            <form class="form-horizontal" enctype="multipart/form-data" method="post" action="/loadIbr">
+                <div class="form-group">
+                    <label for="fullIbrFile">Chose IBR file:</label>
+                    <input type="file" name="file" id="fullIbrFile"
+                           accept="application/xml">
+                    <input type="submit" class="btn btn-primary" value="Proceed">
+                </div>
+            </form>
+        </div>
+    </li>
+</ul>
 
 <footer>
-    <div class="footer">COPYRIGHT 2017</div>
+    <h3>Console Output:</h3>
+    <div class="output">
+        <p id="textOutput" class="error"></p>
+    </div>
 </footer>
-
 </body>
 </html>
